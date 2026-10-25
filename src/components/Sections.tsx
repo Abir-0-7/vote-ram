@@ -2,7 +2,7 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
-import { awards, base, cats, certificates, credentials, emailParts, events, learning, plan, profiles, type Honor } from "@/data/content";
+import { awards, base, cats, certificates, alsoCompeted, competitions, credentials, emailParts, events, learning, ongoing, papers, plan, profiles, type Honor } from "@/data/content";
 import portrait from "@/assets/portrait.jpg";
 import poster from "@/assets/poster.jpg";
 
@@ -10,16 +10,34 @@ const wrap = "mx-auto max-w-6xl px-5";
 const h2 = "font-heading text-3xl font-extrabold tracking-tight text-navy text-balance md:text-5xl";
 
 export function RamStick({ className = "" }: { className?: string }) {
+  const pins = Array.from({ length: 40 }, (_, i) => 10 + i * 7.6).filter((x) => x < 192 || x > 206);
   return (
-    <svg viewBox="0 0 320 110" className={className} role="img" aria-label="RAM memory module, the election symbol">
-      <rect x="2" y="2" width="316" height="86" rx="8" fill="#1349a8" stroke="#8cc0ff" strokeWidth="3" />
+    <svg viewBox="0 0 320 118" className={className} role="img" aria-label="RAM memory module, the election symbol">
+      <rect x="2" y="4" width="316" height="86" rx="7" fill="#0b2a5b" />
       {[0, 1, 2, 3].map((i) => (
-        <motion.rect key={i} x={20 + i * 73} y="18" width="60" height="44" rx="4" stroke="#8cc0ff" strokeWidth="2"
-          initial={{ fill: "#9fd0ff" }} animate={{ fill: "#0b2a5b" }} transition={{ delay: 0.5 + i * 0.2, duration: 0.7 }} />
+        <g key={i}>
+          <motion.rect x={16 + i * 74} y="16" width="62" height="50" rx="5" stroke="#9fd0ff" strokeWidth="2"
+            initial={{ fill: "#9fd0ff" }} animate={{ fill: "#1f5fd0" }} transition={{ delay: 0.5 + i * 0.2, duration: 0.7 }} />
+          <circle cx={25 + i * 74} cy="25" r="2.5" fill="#fff" />
+          <rect x={30 + i * 74} y="36" width="34" height="3" rx="1.5" fill="#fff" opacity=".55" />
+          <rect x={30 + i * 74} y="44" width="22" height="3" rx="1.5" fill="#fff" opacity=".35" />
+        </g>
       ))}
-      <path d="M12 99H308" stroke="#cfe3ff" strokeWidth="14" strokeDasharray="4 3" />
-      <rect x="196" y="86" width="9" height="18" fill="#0b2a5b" />
+      <rect x="2" y="76" width="316" height="3" fill="#1f5fd0" />
+      {pins.map((x) => (
+        <rect key={x} x={x} y="90" width="4.6" height="24" rx="1" fill="#f5c84b" />
+      ))}
     </svg>
+  );
+}
+
+export function SymbolCard({ className = "" }: { className?: string }) {
+  return (
+    <div className={`rounded-2xl border-2 border-royal/30 bg-white p-4 text-center shadow-2xl ${className}`}>
+      <p className="text-xs font-bold tracking-[.3em] text-navy/60">SYMBOL</p>
+      <RamStick className="mx-auto mt-2 w-full" />
+      <p className="font-heading mt-2 text-3xl font-extrabold text-navy">RAM</p>
+    </div>
   );
 }
 
@@ -49,7 +67,7 @@ export function Hero() {
         <div className="relative">
           <Image src={portrait} alt="Md Abdullah Al Mamun" priority placeholder="blur"
             className="aspect-[4/5] w-full rounded-t-[3rem] rounded-b-xl object-cover object-top" />
-          <RamStick className="absolute -bottom-8 -left-3 w-56 -rotate-6 drop-shadow-2xl md:-left-12 md:w-72" />
+          <SymbolCard className="absolute -bottom-8 -left-4 w-56 -rotate-3 md:-left-12 md:w-64" />
         </div>
       </div>
     </header>
@@ -200,6 +218,55 @@ function CertList({ items }: { items: Honor[] }) {
   );
 }
 
+export function Research() {
+  return (
+    <section className={`${wrap} py-16`}>
+      <h2 className={h2}>Research</h2>
+      <p className="mt-3 max-w-prose text-lg">Five papers, with two more in progress.</p>
+      <ul className="mt-6 border-t border-navy/15">
+        {papers.map((p) => (
+          <li key={p.title} className="grid gap-x-8 gap-y-2 border-b border-navy/15 py-5 md:grid-cols-[1fr_auto]">
+            <div>
+              <h3 className="font-heading text-xl font-extrabold text-navy">{p.title}</h3>
+              <p className="mt-1 max-w-prose text-ink/75">{p.note}</p>
+            </div>
+            <p className="md:text-right">
+              <span className="inline-block rounded-full bg-sky px-3 py-1 text-sm font-bold text-navy">{p.status}</span>
+              <span className="mt-1 block text-sm text-ink/70">{p.venue}</span>
+            </p>
+          </li>
+        ))}
+      </ul>
+      <p className="mt-6 font-bold text-navy">In progress</p>
+      <ul className="mt-2 flex flex-wrap gap-2">
+        {ongoing.map((o) => (
+          <li key={o} className="rounded-full border-2 border-navy/20 px-4 py-1.5 font-medium">{o}</li>
+        ))}
+      </ul>
+    </section>
+  );
+}
+
+export function Competitions() {
+  return (
+    <section className={`${wrap} pb-16`}>
+      <h2 className={h2}>Competitions</h2>
+      <p className="mt-3 max-w-prose text-lg">13 competitions on Kaggle, including datathons and global challenges. Two results:</p>
+      <ul className="mt-6 grid gap-4 md:grid-cols-2">
+        {competitions.map((c) => (
+          <li key={c.title} className="rounded-xl border-2 border-navy/15 bg-white p-5">
+            <p className="font-heading text-4xl font-extrabold text-royal">{c.result}</p>
+            <p className="text-sm text-ink/70">{c.of}</p>
+            <h3 className="font-heading mt-3 text-lg font-extrabold text-navy">{c.title}</h3>
+            <p className="mt-1 text-sm text-ink/75">{c.note}</p>
+          </li>
+        ))}
+      </ul>
+      <p className="mt-4 max-w-prose text-ink/75">{alsoCompeted}</p>
+    </section>
+  );
+}
+
 export function Recognition() {
   return (
     <section className={`${wrap} py-16`}>
@@ -285,7 +352,7 @@ export function Vote() {
             Email me: {mail}
           </a>
         )}
-        <RamStick className="mx-auto mt-8 w-48" />
+        <SymbolCard className="mx-auto mt-8 w-56" />
       </div>
     </footer>
   );
