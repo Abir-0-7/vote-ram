@@ -1,0 +1,18 @@
+{
+  "updated": "2026-10-25",
+  "status": "Counting starts after the election on 29 October.",
+  "items": [
+    { "label": "Hackathons", "target": "3 (data/ML, web, AI)", "done": 0, "goal": 3 },
+    { "label": "Monthly contests", "target": "1 every month", "done": 0, "goal": 12 },
+    { "label": "Seminars and workshops", "target": "At least 8", "done": 0, "goal": 8 },
+    { "label": "100 Days Challenge", "target": "1 full cohort, 100 days", "done": 0, "goal": 1 },
+    { "label": "IUPC for Chattogram", "target": "1 contest", "done": 0, "goal": 1 },
+    { "label": "Sports events", "target": "1 online, 1 offline", "done": 0, "goal": 2 },
+    { "label": "Soft skills sessions", "target": "At least 3", "done": 0, "goal": 3 },
+    { "label": "Joint activities with other clubs", "target": "At least 2", "done": 0, "goal": 2 },
+    { "label": "Learning tracks", "target": "Beginner, intermediate, advanced", "done": 0, "goal": 3 },
+    { "label": "Student project showcase", "target": "1 event", "done": 0, "goal": 1 },
+    { "label": "Monthly activity reports", "target": "1 per month", "done": 0, "goal": 12 },
+    { "label": "Semester event calendars", "target": "1 per semester", "done": 0, "goal": 2 }
+  ]
+}
